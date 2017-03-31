@@ -46,6 +46,8 @@
     <Compile Include="player\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sprits\Enemy.cs" />
+    <Compile Include="sprits\EnemyInterface.cs" />
     <Compile Include="ui\General.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="scenes\" />
-    <Folder Include="sprits\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

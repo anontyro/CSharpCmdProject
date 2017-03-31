@@ -15,6 +15,9 @@ namespace AWizardsSlay.player
         public  int magic { get; set; }
         public  int actionPoints { get; set; }
         public  int mp { get; set; }
+        public  int armour { get; set;}
+        public  int level { get; set; }
+        public int criticalHit { get; set; }
 
         public Player()
         {
@@ -22,9 +25,29 @@ namespace AWizardsSlay.player
             {
                 rollChar();
             }
+            armour = 1;
+            level = 1;
+            criticalHit = 10;
             Console.WriteLine(toString());
 
         }
+
+        public int performAttack()
+        {
+            int percentFactor = (attack * 20 / 100)+1;
+            int min = attack - percentFactor;
+            int max = attack + percentFactor;
+
+            Random rand = new Random();
+            int output = rand.Next(min, max);
+
+            return output;
+        }
+
+
+
+
+
 
         private int rollChar()
         {
@@ -49,8 +72,10 @@ namespace AWizardsSlay.player
                 "Dexterity: {3} \n" +
                 "Magic: {4} \n" +
                 "Action Points: {5} \n" +
-                "Magic Points: {6}",
-                hp,maxHp,attack,dex,magic,actionPoints,mp);
+                "Magic Points: {6} \n" +
+                "Level: {7} \n" +
+                "Amour: {8} \n",
+                hp,maxHp,attack,dex,magic,actionPoints,mp,level,armour);
 
             return user;
         }

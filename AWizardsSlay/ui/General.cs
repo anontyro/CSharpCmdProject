@@ -113,8 +113,13 @@ namespace AWizardsSlay.ui
             {
                 Console.WriteLine("Welcome back from your nap, I hope you enjoyed your rest");
             }
-            string userInput = Console.ReadLine();
-            ingameSelection(userInput);
+
+            while (gameState)
+            {
+                string userInput = Console.ReadLine();
+                ingameSelection(userInput);
+            }
+
         }
 
         private int ingameSelection(string userVal)
@@ -132,6 +137,9 @@ namespace AWizardsSlay.ui
 
             switch (userVal)
             {
+                case "a":
+                    player.performAttack();
+                    break;
                 case "x":
                     Console.WriteLine("Game Paused");
                     gamePause();
