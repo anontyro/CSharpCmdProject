@@ -18,6 +18,7 @@ namespace AWizardsSlay.player
         public  int armour { get; set;}
         public  int level { get; set; }
         public int criticalHit { get; set; }
+        public bool playerAlive { get; set; }
 
         public Player()
         {
@@ -28,6 +29,7 @@ namespace AWizardsSlay.player
             armour = 1;
             level = 1;
             criticalHit = 10;
+            playerAlive = true;
             Console.WriteLine(toString());
 
         }
@@ -41,10 +43,44 @@ namespace AWizardsSlay.player
             Random rand = new Random();
             int output = rand.Next(min, max);
 
+            if (isitACrit())
+            {
+                output = output *2 - (output / 2);
+            }
+
             return output;
         }
 
+        public bool isitACrit()
+        {
+            Random rand = new Random();
+            int num = rand.Next(1, 100) + 1;
+            if(num <= criticalHit)
+            {
+                return true;
+            }
 
+            return false;
+        }
+
+        public void takeAHit(int dmg)
+        {
+            hp -= dmg;
+            if (!isStillAlive())
+            {
+                Console.WriteLine("You have fallen already, how disapointing");
+            }
+        }
+
+        private bool isStillAlive()
+        {
+            if (hp <= 0)
+            {
+                playerAlive = false;
+                return false;
+            }
+            return true;
+        }
 
 
 

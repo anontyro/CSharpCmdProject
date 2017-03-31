@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AWizardsSlay.sprits;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -116,6 +117,11 @@ namespace AWizardsSlay.ui
 
             while (gameState)
             {
+                Console.WriteLine("[L]ook around to find treature or treachery");
+                Console.WriteLine("[W]ait in the shadows to see if anything comes this way");
+                Console.WriteLine("e[X]it as always to bring up the menu");
+
+
                 string userInput = Console.ReadLine();
                 ingameSelection(userInput);
             }
@@ -137,8 +143,11 @@ namespace AWizardsSlay.ui
 
             switch (userVal)
             {
-                case "a":
-                    player.performAttack();
+                case "l":
+                    combatState();
+                    break;
+                case "w":
+                    Console.WriteLine("You wait longingly...");
                     break;
                 case "x":
                     Console.WriteLine("Game Paused");
@@ -150,6 +159,69 @@ namespace AWizardsSlay.ui
             }
 
             return selection;
+        }
+
+        private void combatSelection(string userVal, Enemy enemy)
+        {
+            while (userVal.Equals(""))
+            {
+                Console.WriteLine("You stare vacantly at the wall just waiting for someone to tell you what " +
+                    "to do...");
+                userVal = Console.ReadLine();
+            }
+
+            userVal = userVal.Trim().Substring(0, 1).ToLower();
+
+            switch (userVal)
+            {
+                case "a":
+                    enemy.takeAHit(player.attack);
+                    break;
+                case "d":
+                    
+                    break;
+                case "x":
+                    Console.WriteLine("Game Paused");
+                    gamePause();
+                    break;
+                default:
+                    break;
+
+            }
+        }
+
+        //basic test for a combat state
+        private bool combatState()
+        {
+            bool combat = true;
+            GnomeEn gnome = new GnomeEn(player.level,"str", 0,0);
+            Console.WriteLine("Watch out a wild {0} appears", gnome.enemyName);
+
+            while (combat)
+            {
+                Console.WriteLine("Your health: {0} / {1} , {2}'s health {3} / {4}",
+                    player.hp,player.maxHp,gnome.enemyName,gnome.health,gnome.maxHealth);
+                string userVal = Console.ReadLine();
+
+                userVal = userVal.Trim().Substring(0, 1).ToLower();
+
+                combatSelection(userVal, gnome);
+
+                if (!gnome.alive)
+                {
+                    combat = false;
+                    Console.WriteLine("You win!");
+                }else
+                {
+                    player.takeAHit(gnome.attack);
+                }
+                if (!player.playerAlive)
+                {
+                    combat = false;
+                    Console.WriteLine("You died");
+                }
+            }
+            return false;
         }
 
 

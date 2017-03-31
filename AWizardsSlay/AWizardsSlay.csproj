@@ -48,6 +48,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sprits\Enemy.cs" />
     <Compile Include="sprits\EnemyInterface.cs" />
+    <Compile Include="sprits\GnomeEn.cs" />
     <Compile Include="ui\General.cs" />
   </ItemGroup>
   <ItemGroup>

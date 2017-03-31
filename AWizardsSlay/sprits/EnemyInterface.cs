@@ -10,7 +10,7 @@ namespace AWizardsSlay.sprits
     {
 
 
-        int attack();
+        int enemyAttack();
 
         int expGained();
 
